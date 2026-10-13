@@ -9,7 +9,7 @@ What it does, in order:
   1. Writes docs/test_runs/environment.txt (Python, system, Blender or bpy versions).
   2. Renders assets/test_images/ (front and side reference images) if they are missing.
   3. Runs pytest and saves docs/test_runs/pytest.txt.
-  4. Runs the Blender phase scripts 0, 4, 5 and 6 and saves docs/test_runs/phase<N>.txt.
+  4. Runs the Blender phase scripts 0, 4, 5, 6 and 9 and saves docs/test_runs/phase<N>.txt.
   5. Prints a summary and saves docs/test_runs/summary.txt.
 
 Blender is found through the BLENDER_EXE environment variable, paths.blender_exe in
@@ -35,7 +35,7 @@ sys.path.insert(0, str(ROOT))
 from orchestrator.settings import get_blender_exe  # noqa: E402
 
 OUT_DIR = ROOT / "docs" / "test_runs"
-PHASES = [0, 4, 5, 6]
+PHASES = [0, 4, 5, 6, 9]
 PASS_MARKER = "ACCEPTANCE TESTS PASSED"
 
 

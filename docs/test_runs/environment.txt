@@ -1,6 +1,6 @@
-date: 2026-10-13T16:37:55
+date: 2026-10-13T21:54:08
 python: 3.11.16
 system: Windows-10-10.0.22000-SP0
-blender program: C:\Program Files\Blender Foundation\Blender 4.2\blender.exe
+blender program: C:/Program Files/Blender Foundation/Blender 4.2/blender.exe
 blender mode used for Blender scripts: program
 blender version: Blender 4.2.23 LTS

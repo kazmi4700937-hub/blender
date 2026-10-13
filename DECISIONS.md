@@ -110,3 +110,13 @@ Findings:
 - R9.6 Implemented: `orchestrator/geometry/` (base interface, registry, `manual` provider that imports a model
   you already have, `tripo` provider), the `geometry-generate` CLI command, 10 tests with a fake API. No
   real Tripo call has been made.
+
+- R9.7 New bridge command `import_generated_mesh` (logged here as required by spec Section 1): imports .glb/.gltf/.fbx/.obj,
+  scales to the stated height, stands the model on Z = 0 and centres it, bakes the transforms, merges seam duplicates
+  and reports counts and warnings (open edges, separate pieces, heavy mesh, lying down, existing armature).
+- R9.8 Found while testing: glTF import splits vertices at UV and shading seams (a 482-vertex test sphere arrived
+  as 1,984 vertices, 512 pieces and 1,984 open edges). Without merging, every seam looks like a hole and auto weights
+  can tear the seam. The import now merges vertices closer than 0.01 mm (`weld_distance_m`). Merging drops custom
+  split normals, so shading may look slightly different; this is accepted for rigging.
+- R9.9 Tests: `tests/blender/test_phase9.py` builds its own models (no network). Not yet run on a real AI-generated
+  character, which is the next check.

@@ -159,3 +159,7 @@ class BridgeClient:
 
     def set_frame_range(self, start: int, end: int) -> Dict[str, Any]:
         return self.send_command("set_frame_range", {"start": start, "end": end})
+
+    def import_generated_mesh(self, path: str, target_height_m: float = 1.75) -> Dict[str, Any]:
+        """Import a generated model, scale it to target_height_m, stand it on the ground and check the mesh."""
+        return self.send_command("import_generated_mesh", {"path": path, "target_height_m": target_height_m})

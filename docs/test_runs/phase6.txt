@@ -1,29 +1,29 @@
 Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
 Read blend: "C:\Users\abbas\.gemini\antigravity\scratch\blender_rig_assistant\assets\rigged_character.blend"
 Read blend: "C:\Users\abbas\.gemini\antigravity\scratch\blender_rig_assistant\assets\rigged_character.blend"
-Info: Registering panel class: 'RigBakeSettings', bl_idname 'VIEW3D_PT_rig_bake_settings_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering panel class: 'RigUI', bl_idname 'VIEW3D_PT_rig_ui_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering panel class: 'RigLayers', bl_idname 'VIEW3D_PT_rig_layers_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'RIGIFY_OT_get_frame_range', bl_idname 'rigify.get_frame_range_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'POSE_OT_rigify_generic_snap', bl_idname 'pose.rigify_generic_snap_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'POSE_OT_rigify_generic_snap_bake', bl_idname 'pose.rigify_generic_snap_bake_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'POSE_OT_rigify_clear_keyframes', bl_idname 'pose.rigify_clear_keyframes_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'POSE_OT_rigify_limb_ik2fk', bl_idname 'pose.rigify_limb_ik2fk_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'POSE_OT_rigify_limb_ik2fk_bake', bl_idname 'pose.rigify_limb_ik2fk_bake_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'POSE_OT_rigify_limb_toggle_pole', bl_idname 'pose.rigify_limb_toggle_pole_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'POSE_OT_rigify_limb_toggle_pole_bake', bl_idname 'pose.rigify_limb_toggle_pole_bake_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'POSE_OT_rigify_leg_roll_ik2fk', bl_idname 'pose.rigify_leg_roll_ik2fk_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'POSE_OT_rigify_leg_roll_ik2fk_bake', bl_idname 'pose.rigify_leg_roll_ik2fk_bake_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'POSE_OT_rigify_switch_parent', bl_idname 'pose.rigify_switch_parent_cro5lir2c581eca6' has been registered before, unregistering previous
-Info: Registering operator class: 'POSE_OT_rigify_switch_parent_bake', bl_idname 'pose.rigify_switch_parent_bake_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering panel class: 'RigBakeSettings', bl_idname 'VIEW3D_PT_rig_bake_settings_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering panel class: 'RigUI', bl_idname 'VIEW3D_PT_rig_ui_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering panel class: 'RigLayers', bl_idname 'VIEW3D_PT_rig_layers_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'RIGIFY_OT_get_frame_range', bl_idname 'rigify.get_frame_range_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_generic_snap', bl_idname 'pose.rigify_generic_snap_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_generic_snap_bake', bl_idname 'pose.rigify_generic_snap_bake_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_clear_keyframes', bl_idname 'pose.rigify_clear_keyframes_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_limb_ik2fk', bl_idname 'pose.rigify_limb_ik2fk_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_limb_ik2fk_bake', bl_idname 'pose.rigify_limb_ik2fk_bake_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_limb_toggle_pole', bl_idname 'pose.rigify_limb_toggle_pole_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_limb_toggle_pole_bake', bl_idname 'pose.rigify_limb_toggle_pole_bake_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_leg_roll_ik2fk', bl_idname 'pose.rigify_leg_roll_ik2fk_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_leg_roll_ik2fk_bake', bl_idname 'pose.rigify_leg_roll_ik2fk_bake_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_switch_parent', bl_idname 'pose.rigify_switch_parent_mbk5aydlfa26eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_switch_parent_bake', bl_idname 'pose.rigify_switch_parent_bake_mbk5aydlfa26eca6' has been registered before, unregistering previous
 Saved: 'C:\Users\abbas\.gemini\antigravity\scratch\blender_rig_assistant\output\previews\jump_start.png'
-Time: 00:02.11 (Saving: 00:00.31)
+Time: 00:05.99 (Saving: 00:00.96)
 
 Saved: 'C:\Users\abbas\.gemini\antigravity\scratch\blender_rig_assistant\output\previews\jump_apex.png'
-Time: 00:00.13 (Saving: 00:00.06)
+Time: 00:00.54 (Saving: 00:00.17)
 
 Saved: 'C:\Users\abbas\.gemini\antigravity\scratch\blender_rig_assistant\output\previews\jump_land.png'
-Time: 00:00.17 (Saving: 00:00.08)
+Time: 00:00.52 (Saving: 00:00.13)
 
 === RUNNING PHASE 6 ACCEPTANCE TESTS ===
 Reloading external rigs...
@@ -36,35 +36,35 @@ PASS: Rejected short jump duration: duration_s must be at least 0.3s, got 0.15
 
 --- Test 2: Jump from 2m platform to ground ---
 register_class(...):
-Info: Registering panel class: 'RigBakeSettings', bl_idname 'VIEW3D_PT_rig_bake_settings_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering panel class: 'RigBakeSettings', bl_idname 'VIEW3D_PT_rig_bake_settings_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering panel class: 'RigUI', bl_idname 'VIEW3D_PT_rig_ui_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering panel class: 'RigUI', bl_idname 'VIEW3D_PT_rig_ui_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering panel class: 'RigLayers', bl_idname 'VIEW3D_PT_rig_layers_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering panel class: 'RigLayers', bl_idname 'VIEW3D_PT_rig_layers_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'RIGIFY_OT_get_frame_range', bl_idname 'rigify.get_frame_range_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'RIGIFY_OT_get_frame_range', bl_idname 'rigify.get_frame_range_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'POSE_OT_rigify_generic_snap', bl_idname 'pose.rigify_generic_snap_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_generic_snap', bl_idname 'pose.rigify_generic_snap_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'POSE_OT_rigify_generic_snap_bake', bl_idname 'pose.rigify_generic_snap_bake_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_generic_snap_bake', bl_idname 'pose.rigify_generic_snap_bake_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'POSE_OT_rigify_clear_keyframes', bl_idname 'pose.rigify_clear_keyframes_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_clear_keyframes', bl_idname 'pose.rigify_clear_keyframes_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'POSE_OT_rigify_limb_ik2fk', bl_idname 'pose.rigify_limb_ik2fk_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_limb_ik2fk', bl_idname 'pose.rigify_limb_ik2fk_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'POSE_OT_rigify_limb_ik2fk_bake', bl_idname 'pose.rigify_limb_ik2fk_bake_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_limb_ik2fk_bake', bl_idname 'pose.rigify_limb_ik2fk_bake_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'POSE_OT_rigify_limb_toggle_pole', bl_idname 'pose.rigify_limb_toggle_pole_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_limb_toggle_pole', bl_idname 'pose.rigify_limb_toggle_pole_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'POSE_OT_rigify_limb_toggle_pole_bake', bl_idname 'pose.rigify_limb_toggle_pole_bake_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_limb_toggle_pole_bake', bl_idname 'pose.rigify_limb_toggle_pole_bake_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'POSE_OT_rigify_leg_roll_ik2fk', bl_idname 'pose.rigify_leg_roll_ik2fk_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_leg_roll_ik2fk', bl_idname 'pose.rigify_leg_roll_ik2fk_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'POSE_OT_rigify_leg_roll_ik2fk_bake', bl_idname 'pose.rigify_leg_roll_ik2fk_bake_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_leg_roll_ik2fk_bake', bl_idname 'pose.rigify_leg_roll_ik2fk_bake_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'POSE_OT_rigify_switch_parent', bl_idname 'pose.rigify_switch_parent_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_switch_parent', bl_idname 'pose.rigify_switch_parent_mbk5aydlfa26eca6' has been registered before, unregistering previous
 register_class(...):
-Info: Registering operator class: 'POSE_OT_rigify_switch_parent_bake', bl_idname 'pose.rigify_switch_parent_bake_cro5lir2c581eca6' has been registered before, unregistering previous
+Info: Registering operator class: 'POSE_OT_rigify_switch_parent_bake', bl_idname 'pose.rigify_switch_parent_bake_mbk5aydlfa26eca6' has been registered before, unregistering previous
 Reloading external rigs...
 Reloading external metarigs...
 Environment built: {'kind': 'platform_drop', 'created_objects': ['Ground_Plane', 'Platform_Box'], 'platform_top_z': 2.0, 'height_m': 2.0}

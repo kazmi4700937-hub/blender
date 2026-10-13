@@ -1,0 +1,69 @@
+=== RUNNING PHASE 9 ACCEPTANCE TESTS ===
+
+--- Test 1: clean closed model is scaled to 1.75 m, stood on the ground and centred ---
+INFO Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.2\4.2\python\lib\site-packages\extern_draco.dll
+21:57:06 | INFO: Starting glTF 2.0 export
+21:57:06 | INFO: Extracting primitive: Sphere
+21:57:06 | INFO: Primitives created: 1
+21:57:06 | INFO: Finished glTF 2.0 export in 0.01880049705505371 s
+
+21:57:07 | INFO: Data are loaded, start creating Blender stuff
+21:57:07 | INFO: Blender create Mesh node Sphere
+21:57:07 | INFO: glTF import finished in 0.02s
+{'path': 'C:\\Users\\abbas\\AppData\\Local\\Temp\\phase9_w972soe9\\clean.glb', 'scale_factor': 0.795455, 'height_m': 1.75, 'width_m': 0.4375, 'depth_m': 0.2625, 'min_z': -0.0, 'vertices_before_weld': 1984, 'mesh_objects': ['Sphere'], 'armature_objects': [], 'vertices': 482, 'triangles': 960, 'non_manifold_edges': 0, 'loose_vertices': 0, 'pieces': 1, 'has_uv': True, 'materials': [], 'warnings': []}
+PASS: height is 1.75 m (got 1.75)
+PASS: feet are on the ground (min z -0.0)
+PASS: model is centred on X and Y
+PASS: scale and location are baked into the mesh (object transform is identity)
+PASS: seam duplicates were merged (1984 -> 482 vertices)
+PASS: clean mesh reports 0 open edges and 1 piece
+PASS: clean mesh gives no warnings (got [])
+
+--- Test 2: an open mesh is reported ---
+21:57:07 | INFO: Starting glTF 2.0 export
+21:57:07 | INFO: Extracting primitive: Cylinder
+21:57:07 | INFO: Primitives created: 1
+21:57:07 | INFO: Finished glTF 2.0 export in 0.010972023010253906 s
+
+21:57:08 | INFO: Data are loaded, start creating Blender stuff
+21:57:08 | INFO: Blender create Mesh node Cylinder
+21:57:08 | INFO: glTF import finished in 0.00s
+PASS: open edges counted (48)
+PASS: a warning names the open edges
+PASS: default target height is 1.75 m
+
+--- Test 3: separate pieces are reported ---
+21:57:08 | INFO: Starting glTF 2.0 export
+21:57:08 | INFO: Extracting primitive: Sphere
+21:57:08 | INFO: Primitives created: 1
+21:57:08 | INFO: Extracting primitive: Cube
+21:57:08 | INFO: Primitives created: 1
+21:57:08 | INFO: Finished glTF 2.0 export in 0.02004837989807129 s
+
+21:57:08 | INFO: Data are loaded, start creating Blender stuff
+21:57:08 | INFO: Blender create Mesh node Sphere
+21:57:08 | INFO: Blender create Mesh node Cube
+21:57:08 | INFO: glTF import finished in 0.01s
+PASS: two pieces counted (got 2)
+PASS: a warning names the separate pieces
+
+--- Test 4: a model lying on its side is flagged ---
+21:57:08 | INFO: Starting glTF 2.0 export
+21:57:08 | INFO: Extracting primitive: Sphere
+21:57:08 | INFO: Primitives created: 1
+21:57:08 | INFO: Finished glTF 2.0 export in 0.011884212493896484 s
+
+21:57:08 | INFO: Data are loaded, start creating Blender stuff
+21:57:08 | INFO: Blender create Mesh node Sphere
+21:57:08 | INFO: glTF import finished in 0.01s
+PASS: a warning says the model may be lying down
+
+--- Test 5: bad input is rejected with a readable error ---
+PASS: rejected: Model file not found: 'C:\Users\abbas\AppData\Local\Temp\phase9_w972soe9\missing.glb'
+PASS: rejected: target_height_m 10.0 is outside 0.2 to 4.0 metres
+PASS: rejected: Unsupported model type '.txt'. Use one of: .glb, .gltf, .fbx, .obj
+
+=== ACCEPTANCE TESTS PASSED ===
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+
+Blender quit

@@ -5,7 +5,7 @@ import json
 import traceback
 import bpy
 
-from .commands import scene, fit, rig, environment, motion
+from .commands import scene, fit, rig, environment, motion, geometry
 
 # Global server state
 _server_sock = None
@@ -30,6 +30,7 @@ COMMAND_HANDLERS = {
     "list_bones": rig.cmd_list_bones,
     "build_environment": environment.cmd_build_environment,
     "apply_motion": motion.cmd_apply_motion,
+    "import_generated_mesh": geometry.cmd_import_generated_mesh,
 }
 
 def register_command(name, handler):

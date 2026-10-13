@@ -132,6 +132,32 @@ def geometry_generate(
         typer.secho(f"Note: {note}", fg=typer.colors.YELLOW)
 
 @app.command()
+def import_generated_mesh(
+    path: str = typer.Argument(..., help="Model file (.glb, .gltf, .fbx, .obj), for example output/geometry/generated.glb"),
+    height_m: float = typer.Option(1.75, help="Real height of the character in metres"),
+    save: Optional[str] = typer.Option(None, help="Save the scene as this .blend file afterwards"),
+):
+    """Import a generated model into Blender, scale it, stand it on the ground and check the mesh."""
+    client = get_bridge_client()
+    try:
+        client.connect()
+        res = client.import_generated_mesh(os.path.abspath(path), height_m)
+        typer.secho("Model imported and normalized.", fg=typer.colors.GREEN)
+        typer.echo(f"Height {res['height_m']} m, width {res['width_m']} m, depth {res['depth_m']} m (scale factor {res['scale_factor']})")
+        typer.echo(f"Vertices {res['vertices']} (before merging seams: {res['vertices_before_weld']}), triangles {res['triangles']}, "
+                   f"pieces {res['pieces']}, open edges {res['non_manifold_edges']}, UV map: {res['has_uv']}")
+        for warning in res["warnings"]:
+            typer.secho(f"Warning: {warning}", fg=typer.colors.YELLOW)
+        if save:
+            client.save_blend(os.path.abspath(save))
+            typer.echo(f"Saved {save}")
+    except BridgeError as e:
+        typer.secho(f"Error: {e}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
+    finally:
+        client.close()
+
+@app.command()
 def propose_landmarks(
     front: str = typer.Option("assets/test_images/front.png", help="Path to front view image"),
     side: str = typer.Option("assets/test_images/side.png", help="Path to side view image"),

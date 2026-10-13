@@ -147,7 +147,10 @@ python -m orchestrator.cli geometry-generate --image private/views/front.png --p
 # Tripo web API (set TRIPO_API_KEY first; see DECISIONS.md Phase 9 for what is not yet verified)
 python -m orchestrator.cli geometry-generate --image private/views/front.png --provider tripo --rig
 ```
-Results are saved in `output/geometry/`. A Tripo rig is Tripo's own skeleton, not a Rigify rig.
+Results are saved in `output/geometry/`. To bring the model into Blender (with the Blender add-on server running), scale it to the character's real height, stand it on the ground and check the mesh:
+```
+python -m orchestrator.cli import-generated-mesh output/geometry/generated.glb --height-m 1.75 --save output/generated_scene.blend
+``` A Tripo rig is Tripo's own skeleton, not a Rigify rig.
 
 ## Notes
 - Do not commit third-party artwork (for example game character images) to a public repository. Keep private test images in a `private/` folder, which `.gitignore` excludes.
