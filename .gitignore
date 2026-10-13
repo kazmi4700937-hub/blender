@@ -25,3 +25,4 @@ benchmarks_private/
 .idea/
 .DS_Store
 Thumbs.db
+*.zip
