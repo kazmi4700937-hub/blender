@@ -1,0 +1,40 @@
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Info: Total files 5 | Changed 5 | Failed 0
+=== RUNNING PHASE 4 ACCEPTANCE TESTS ===
+
+--- Test 1: Round-trip test to own spec ---
+Reloading external rigs...
+Reloading external metarigs...
+Fit template result: {'fitted': True, 'height_m': 1.979599952697754, 'joints_count': 20, 'mesh_vertices': 1138}
+Bone upper_arm.L head vs shoulder_L: diff = 0.00 cm
+Bone forearm.L head vs elbow_L: diff = 1.00 cm
+Bone hand.L head vs wrist_L: diff = 0.00 cm
+Bone thigh.L head vs hip_L: diff = 0.00 cm
+Bone shin.L head vs knee_L: diff = 0.00 cm
+Bone foot.L head vs ankle_L: diff = 0.00 cm
+PASS: Round-trip joint positions match own spec within 1 cm.
+
+--- Test 2: Fitting with 20% wider shoulders ---
+Fitted shoulder width: 0.4687m vs original: 0.3906m
+PASS: 20% wider shoulders confirmed on rig.
+
+--- Test 3: Symmetry check ---
+Pair upper_arm.L / upper_arm.R: X asymmetry = 0.00 cm, Z asymmetry = 0.00 cm
+Pair forearm.L / forearm.R: X asymmetry = 0.00 cm, Z asymmetry = 0.00 cm
+Pair hand.L / hand.R: X asymmetry = 0.00 cm, Z asymmetry = 0.00 cm
+Pair thigh.L / thigh.R: X asymmetry = 0.00 cm, Z asymmetry = 0.00 cm
+Pair shin.L / shin.R: X asymmetry = 0.00 cm, Z asymmetry = 0.00 cm
+Pair foot.L / foot.R: X asymmetry = 0.00 cm, Z asymmetry = 0.00 cm
+PASS: All joint positions are symmetric about X = 0 within 1 cm.
+
+--- Test 4: Mesh manifold and normals check ---
+Non-manifold edges count: 0
+Collapsed/degenerate faces count: 0
+Mesh signed volume: 0.11065114605737901
+PASS: Mesh is manifold with zero non-manifold edges and outward-facing normals.
+Info: Saved "fitted_character.blend"
+Saved fitted character blend to: C:\Users\abbas\.gemini\antigravity\scratch\blender_rig_assistant\assets\fitted_character.blend
+
+=== PHASE 4 ACCEPTANCE TESTS PASSED SUCCESSFULLY! ===
+
+Blender quit

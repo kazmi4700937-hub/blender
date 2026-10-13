@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Generated output
+output/
+
+# Blender backup files
+*.blend1
+*.blend2
+
+# Private test images (for example third-party artwork). Keep these out of the repository.
+private/
+benchmarks_private/
+
+# Secrets
+.env
+*.key
+
+# Editor and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

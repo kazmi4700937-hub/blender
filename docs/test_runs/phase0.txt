@@ -1,0 +1,30 @@
+=== RUNNING PHASE 0 ACCEPTANCE TEST ===
+Reloading external rigs...
+Reloading external metarigs...
+PASS: Base character mesh has zero unweighted vertices.
+Fetch rig.
+Clear rig animation data.
+Create widgets collection: 0.002
+Duplicate rig: 0.019
+Instantiate rigs: 0.005
+Initialize rigs: 0.000
+Prepare bones: 0.003
+Generate bones: 6.938
+Parent bones: 0.047
+Configure bones: 0.031
+Preapply bones: 0.016
+Apply bones: 0.000
+Rig bones: 0.078
+Generate widgets: 0.031
+Assign layers: 0.047
+Finalize: 0.047
+The rest: 0.047
+Info: Successfully generated: "rig"
+PASS: Rigify successfully generated 'rig' with 706 bones.
+PASS: All required control bones verified in generated rig.
+PASS: IK/FK switch properties verified on all limb parent bones.
+=== PHASE 0 ACCEPTANCE TESTS PASSED SUCCESSFULLY! ===
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Read blend: "C:\Users\abbas\.gemini\antigravity\scratch\blender_rig_assistant\assets\base_character.blend"
+
+Blender quit

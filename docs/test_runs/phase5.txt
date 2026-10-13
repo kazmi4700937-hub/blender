@@ -1,0 +1,128 @@
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Info: Total files 5 | Changed 5 | Failed 0
+=== RUNNING PHASE 5 ACCEPTANCE TESTS ===
+
+--- Test 1: Rig generation on 3 distinct character specs ---
+
+Testing rig generation for spec: Normal...
+Reloading external rigs...
+Reloading external metarigs...
+Reloading external rigs...
+Reloading external metarigs...
+Fetch rig.
+Clear rig animation data.
+Create widgets collection: 0.000
+Duplicate rig: 0.016
+Instantiate rigs: 0.000
+Initialize rigs: 0.000
+Prepare bones: 0.000
+Generate bones: 6.988
+Parent bones: 0.052
+Configure bones: 0.049
+Preapply bones: 0.018
+Apply bones: 0.000
+Rig bones: 0.067
+Generate widgets: 0.048
+Assign layers: 0.067
+Finalize: 0.071
+The rest: 0.060
+Info: Successfully generated: "rig"
+Generated rig: rig with 706 bones.
+Bind mesh: base_character -> rig, unweighted: 0
+
+Testing rig generation for spec: Wide...
+Reloading external rigs...
+Reloading external metarigs...
+Reloading external rigs...
+Reloading external metarigs...
+Fetch rig.
+Clear rig animation data.
+Create widgets collection: 0.000
+Duplicate rig: 0.016
+Instantiate rigs: 0.000
+Initialize rigs: 0.000
+Prepare bones: 0.000
+Generate bones: 7.651
+Parent bones: 0.043
+Configure bones: 0.052
+Preapply bones: 0.015
+Apply bones: 0.016
+Rig bones: 0.101
+Generate widgets: 0.073
+Assign layers: 0.091
+Finalize: 0.067
+The rest: 0.051
+Info: Successfully generated: "rig"
+Generated rig: rig with 706 bones.
+Bind mesh: base_character -> rig, unweighted: 0
+
+Testing rig generation for spec: TallThin...
+Reloading external rigs...
+Reloading external metarigs...
+Reloading external rigs...
+Reloading external metarigs...
+Fetch rig.
+Clear rig animation data.
+Create widgets collection: 0.000
+Duplicate rig: 0.024
+Instantiate rigs: 0.009
+Initialize rigs: 0.000
+Prepare bones: 0.003
+Generate bones: 8.982
+Parent bones: 0.053
+Configure bones: 0.058
+Preapply bones: 0.009
+Apply bones: 0.008
+Rig bones: 0.091
+Generate widgets: 0.065
+Assign layers: 0.070
+Finalize: 0.065
+The rest: 0.067
+Info: Successfully generated: "rig"
+Generated rig: rig with 706 bones.
+Bind mesh: base_character -> rig, unweighted: 0
+
+PASS: Rig generates without errors with 0 unweighted vertices across all 3 specs.
+
+--- Test 2 & 3: Automated Pose Deformation Isolation Test ---
+Reloading external rigs...
+Reloading external metarigs...
+Reloading external rigs...
+Reloading external metarigs...
+Fetch rig.
+Clear rig animation data.
+Create widgets collection: 0.008
+Duplicate rig: 0.017
+Instantiate rigs: 0.000
+Initialize rigs: 0.000
+Prepare bones: 0.008
+Generate bones: 8.798
+Parent bones: 0.049
+Configure bones: 0.045
+Preapply bones: 0.017
+Apply bones: 0.000
+Rig bones: 0.069
+Generate widgets: 0.048
+Assign layers: 0.066
+Finalize: 0.065
+The rest: 0.053
+Info: Successfully generated: "rig"
+Rotating knee bone: shin_fk.L
+Total vertices moved by bending left knee: 103 of 1138
+Right leg vertices moved: 0
+Upper torso/head vertices moved: 0
+PASS: Left knee bend is cleanly isolated to the left leg.
+
+--- Test 4: Finger bones and curling test ---
+PASS: Finger bones confirmed for all 5 fingers on both hands.
+Hand volume after curling index finger: 0.10660
+PASS: Finger curls cleanly without hand collapse.
+
+--- Test 5: IK / FK Switch Properties ---
+PASS: IK/FK switching verified on legs and arms.
+Info: Saved "rigged_character.blend"
+Saved rigged character blend to: C:\Users\abbas\.gemini\antigravity\scratch\blender_rig_assistant\assets\rigged_character.blend
+
+=== PHASE 5 ACCEPTANCE TESTS PASSED SUCCESSFULLY! ===
+
+Blender quit

@@ -1,0 +1,23 @@
+bridge:
+  host: "127.0.0.1"
+  port: 9876
+  timeout_seconds: 30.0
+
+character:
+  default_height_m: 1.75
+  fps: 24
+
+paths:
+  # Used only if the BLENDER_EXE environment variable is not set. Leave it or change it for your machine.
+  blender_exe: "C:/Program Files/Blender Foundation/Blender 4.2/blender.exe"
+  base_character_blend: "assets/base_character.blend"
+  output_dir: "output"
+  test_images_dir: "assets/test_images"
+
+llm:
+  model_env_var: "LLM_MODEL"
+  default_model: "claude-sonnet-5-5"  # VERIFY the current vision-capable model name. LLM_MODEL overrides this.
+  api_key_env_var: "ANTHROPIC_API_KEY"
+
+addon:
+  allow_exec: false
