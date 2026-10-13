@@ -19,5 +19,30 @@ llm:
   default_model: "claude-sonnet-5-5"  # VERIFY the current vision-capable model name. LLM_MODEL overrides this.
   api_key_env_var: "ANTHROPIC_API_KEY"
 
+vision:
+  # Model rembg uses to cut the character out of gradient or busy backgrounds (about 179 MB, downloaded once).
+  # SEGMENTATION_MODEL environment variable overrides this.
+  segmentation_model: "isnet-general-use"
+
+geometry:
+  # Which service turns reference images into a 3D model. GEOMETRY_PROVIDER overrides this.
+  #   manual : use a model file you already have (no account, no network)
+  #   tripo  : Tripo web API (needs TRIPO_API_KEY)
+  provider: "manual"
+  tripo:
+    base_url: "https://openapi.tripo3d.com/v3"
+    api_key_env_var: "TRIPO_API_KEY"
+    poll_seconds: 5
+    timeout_seconds: 600
+    generation_endpoint: "/generation/image-to-model"
+    # VERIFY: the exact body of the image-to-model request could not be read from Tripo's docs.
+    # "{file_token}" is replaced with the uploaded image. Add model version or texture fields here.
+    generation_body:
+      input: "{file_token}"
+    rig:
+      rig_type: "auto"      # auto uses what Tripo's rig-check recommends
+      spec: "mixamo"        # or "tripo"
+      out_format: "glb"
+
 addon:
   allow_exec: false

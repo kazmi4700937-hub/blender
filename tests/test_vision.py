@@ -148,3 +148,64 @@ def test_rendered_reference_images():
     diff_ratio = abs(front_mask["height_px"] - side_mask["height_px"]) / front_mask["height_px"]
     assert diff_ratio < 0.02
 
+
+
+def test_busy_background_allowed_with_flag(tmp_path):
+    """With allow_busy_background=True a busy image passes and a warning is returned."""
+    front_img, _ = create_synthetic_humanoid(height=400, bg="busy", img_size=(512, 512))
+    side_img, _ = create_synthetic_humanoid(height=400, bg="black", img_size=(512, 512))
+    front_path = str(tmp_path / "front_busy.png")
+    side_path = str(tmp_path / "side.png")
+    front_img.save(front_path)
+    side_img.save(side_path)
+
+    res = validate_input_images(front_path, side_path, allow_busy_background=True)
+    assert len(res["warnings"]) == 1
+    assert "Front" in res["warnings"][0]
+
+
+def test_segmentation_model_setting(monkeypatch):
+    """SEGMENTATION_MODEL overrides config.yaml, which overrides the built-in default."""
+    from orchestrator.settings import get_segmentation_model, FALLBACK_SEGMENTATION_MODEL
+
+    monkeypatch.delenv("SEGMENTATION_MODEL", raising=False)
+    assert get_segmentation_model({}) == FALLBACK_SEGMENTATION_MODEL
+    assert get_segmentation_model({"vision": {"segmentation_model": "u2net"}}) == "u2net"
+    monkeypatch.setenv("SEGMENTATION_MODEL", "u2netp")
+    assert get_segmentation_model({"vision": {"segmentation_model": "u2net"}}) == "u2netp"
+
+
+def test_busy_background_uses_configured_rembg_model(tmp_path, monkeypatch):
+    """A busy-background image goes to rembg, with a session made from the configured model."""
+    import sys
+    import types
+    import numpy as np
+    from PIL import Image
+    from orchestrator.vision import silhouette
+
+    calls = {}
+
+    def fake_new_session(name):
+        calls["model"] = name
+        return "session"
+
+    def fake_remove(img, session=None):
+        calls["session"] = session
+        arr = np.zeros((img.height, img.width, 4), dtype=np.uint8)
+        arr[100:300, 200:300] = 255  # a white block counts as the character
+        return Image.fromarray(arr, "RGBA")
+
+    fake = types.SimpleNamespace(new_session=fake_new_session, remove=fake_remove)
+    monkeypatch.setitem(sys.modules, "rembg", fake)
+    monkeypatch.setenv("SEGMENTATION_MODEL", "test-seg-model")
+    silhouette._SESSIONS.clear()
+
+    img, _ = create_synthetic_humanoid(height=400, bg="busy", img_size=(512, 512))
+    path = str(tmp_path / "busy.png")
+    img.save(path)
+    res = silhouette.extract_silhouette_mask(path)
+
+    assert calls["model"] == "test-seg-model"
+    assert calls["session"] == "session"
+    assert res["height_px"] == 200
+    silhouette._SESSIONS.clear()

@@ -65,11 +65,17 @@ def detect_background_type(img: Image.Image) -> Dict[str, Any]:
 def validate_input_images(
     front_path: str,
     side_path: str,
-    max_height_diff_ratio: float = 0.05
+    max_height_diff_ratio: float = 0.05,
+    allow_busy_background: bool = False,
 ) -> Dict[str, Any]:
     """
     Validates front and side images according to Section 3 of the specification.
     Returns metadata if valid, otherwise raises ImageValidationError.
+
+    By default a busy or gradient background is rejected (spec Section 3). With
+    allow_busy_background=True such an image is accepted and the silhouette step cuts the
+    character out with rembg instead. The result then lists a warning for each such view,
+    because the cut-out is a model estimate and should be checked on the overlay.
     """
     check_image_exists(front_path, "Front")
     check_image_exists(side_path, "Side")
@@ -99,19 +105,28 @@ def validate_input_images(
     front_bg = detect_background_type(front_img)
     side_bg = detect_background_type(side_img)
     
-    if front_bg["type"] == "busy":
+    warnings = []
+    if allow_busy_background:
+        for name, bg in (("Front", front_bg), ("Side", side_bg)):
+            if bg["type"] == "busy":
+                warnings.append(
+                    f"{name} image has a busy or gradient background; the silhouette will be "
+                    "cut out with rembg. Check the mask before trusting measurements."
+                )
+    if front_bg["type"] == "busy" and not allow_busy_background:
         raise ImageValidationError(
             f"Front image has a busy or non-uniform background (border variance {front_bg['border_std']:.1f}). "
             "Please use a transparent PNG or a flat solid background."
         )
         
-    if side_bg["type"] == "busy":
+    if side_bg["type"] == "busy" and not allow_busy_background:
         raise ImageValidationError(
             f"Side image has a busy or non-uniform background (border variance {side_bg['border_std']:.1f}). "
             "Please use a transparent PNG or a flat solid background."
         )
         
     return {
+        "warnings": warnings,
         "front": {
             "path": front_path,
             "size": [w_front, h_front],

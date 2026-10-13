@@ -2,7 +2,7 @@ import typer
 import yaml
 import os
 import sys
-from typing import Optional
+from typing import List, Optional
 from .bridge_client import BridgeClient, BridgeError
 from .settings import load_config
 
@@ -68,12 +68,17 @@ def clear_scene():
 @app.command()
 def validate_images(
     front: str = typer.Option("assets/test_images/front.png", help="Path to front view image"),
-    side: str = typer.Option("assets/test_images/side.png", help="Path to side view image")
+    side: str = typer.Option("assets/test_images/side.png", help="Path to side view image"),
+    allow_busy_background: bool = typer.Option(
+        False, "--allow-busy-background",
+        help="Accept gradient or busy backgrounds; the character is then cut out with rembg."),
 ):
     """Validate front and side reference images."""
     from .vision.validate import validate_input_images, ImageValidationError
     try:
-        res = validate_input_images(front, side)
+        res = validate_input_images(front, side, allow_busy_background=allow_busy_background)
+        for warning in res.get("warnings", []):
+            typer.secho(f"Warning: {warning}", fg=typer.colors.YELLOW)
         typer.secho("Images validated successfully!", fg=typer.colors.GREEN)
         typer.echo(f"Front: {res['front']['size']} (bg: {res['front']['background']['type']})")
         typer.echo(f"Side:  {res['side']['size']} (bg: {res['side']['background']['type']})")
@@ -99,6 +104,32 @@ def extract_silhouettes(
     typer.secho("Silhouettes extracted successfully!", fg=typer.colors.GREEN)
     typer.echo(f"Front mask: height {f_res['height_px']}px, ground y={f_res['ground_y']} -> {mask_front_path}")
     typer.echo(f"Side mask:  height {s_res['height_px']}px, ground y={s_res['ground_y']} -> {mask_side_path}")
+
+@app.command()
+def geometry_generate(
+    images: List[str] = typer.Option(..., "--image", help="Reference image (repeat for more than one; front first)"),
+    provider: Optional[str] = typer.Option(None, help="manual or tripo. Default: geometry.provider in config.yaml"),
+    model: Optional[str] = typer.Option(None, help="manual provider only: path to a finished model file (.glb, .gltf, .fbx, .obj)"),
+    rig: bool = typer.Option(False, "--rig", help="Also ask the provider to rig the model, if it can"),
+    output_dir: str = typer.Option("output/geometry", help="Folder for the model files"),
+):
+    """Get a 3D model for the reference images from the chosen provider."""
+    from .geometry import GeometryError, GeometryRequest, get_provider
+    try:
+        prov = get_provider(provider)
+        options = {"model_path": model} if model else {}
+        result = prov.generate(GeometryRequest(image_paths=images, output_dir=output_dir, rig=rig, options=options))
+    except GeometryError as e:
+        typer.secho(f"Geometry failed: {e}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
+    typer.secho(f"Model ready (provider: {result.provider})", fg=typer.colors.GREEN)
+    typer.echo(f"Mesh:   {result.mesh_path}")
+    if result.rigged_path:
+        typer.echo(f"Rigged: {result.rigged_path}")
+    if result.credits_used is not None:
+        typer.echo(f"Credits used: {result.credits_used:g}")
+    for note in result.notes:
+        typer.secho(f"Note: {note}", fg=typer.colors.YELLOW)
 
 @app.command()
 def propose_landmarks(

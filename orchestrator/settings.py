@@ -58,6 +58,20 @@ def get_model_name(cfg: Optional[Dict[str, Any]] = None) -> str:
     return os.environ.get(env_var) or llm_cfg.get("default_model") or FALLBACK_MODEL
 
 
+# Background-removal model used by rembg when an image has no alpha channel and no flat background.
+# isnet-general-use is about 179 MB and runs on a normal PC. The rembg default model is about 1 GB.
+FALLBACK_SEGMENTATION_MODEL = "isnet-general-use"
+
+
+def get_segmentation_model(cfg: Optional[Dict[str, Any]] = None) -> str:
+    """rembg model name: SEGMENTATION_MODEL environment variable, then config.yaml vision.segmentation_model."""
+    cfg = load_config() if cfg is None else cfg
+    vision_cfg = cfg.get("vision", {}) or {}
+    return (os.environ.get("SEGMENTATION_MODEL")
+            or vision_cfg.get("segmentation_model")
+            or FALLBACK_SEGMENTATION_MODEL)
+
+
 def get_api_key(cfg: Optional[Dict[str, Any]] = None) -> Optional[str]:
     """API key from the environment variable named in config.yaml (default ANTHROPIC_API_KEY)."""
     cfg = load_config() if cfg is None else cfg

@@ -49,3 +49,64 @@ These changes follow the Handoff & Problem Report and Spec v3 Section 3. No beha
 - **D8:** the base body is 1.98 m tall, the spec default is 1.75 m. Decide which is standard, then regenerate `fitted_character.blend` and `rigged_character.blend` from one spec (they currently come from different test specs).
 - The generated Rigify rig has 706 bones including face and breast controls. Spec v2 asked for a face-free head.
 - The GitHub repository still needs the full project pushed from your computer.
+
+
+## Phase 9a: Gradient backgrounds and turnaround sheets
+
+Date: 13 Oct 2026. Trigger: a real test character (front, side and back turnaround on a grey gradient
+backdrop with floor shadows) was rejected as a "busy" background, and the rembg default model (about 1 GB)
+ran out of memory when tried.
+
+- R9a.1 Spec Section 3 still rejects busy backgrounds by default. A new option accepts them:
+  `validate-images --allow-busy-background` (`allow_busy_background=True` in code). Accepted images get a
+  warning in the result and in the console, because the cut-out is a model estimate.
+- R9a.2 The rembg model is now a setting: `SEGMENTATION_MODEL` environment variable, then
+  `vision.segmentation_model` in config.yaml, then `isnet-general-use`. That model is about 179 MB and
+  is downloaded once. The rembg 2.0.85 default is about 1 GB. Checked on the test sheet: it cut out all
+  three views cleanly, excluded the floor shadows and kept fine edges. Not yet checked on other art styles.
+- R9a.3 Tried and dropped: modelling the gradient from the image border (polynomial and per-row) with a
+  shadow-brightness rule. Dark clothing and floor shadows have the same brightness range, so it left holes
+  in the clothing and included parts of the backdrop.
+- R9a.4 `tools/split_turnaround.py` cuts a sheet into equal columns (front, side, back). It assumes even spacing.
+- R9a.5 Still open: the arms are in an A-pose (about 30 degrees), not a T-pose, and two rods behind the waist
+  show beside the body in the front view. Both belong to phases 10 to 13 (feature inventory, pose, parts).
+
+## Decisions confirmed by the owner (13 Oct 2026)
+
+- D8 Base body height: standard is 1.75 m. The current base_character.blend is 1.98 m, so it must be
+  scaled or regenerated and the fitted and rigged .blend files rebuilt from one spec. Not done yet.
+- D1 Geometry route: hybrid, the template body plus separately built parts. Tested first on the turnaround test character.
+- D2 Hardware: a hosted image-to-3D service is allowed for the geometry phase, chosen after the Phase 9 tool comparison.
+
+## Phase 9: Geometry service comparison (checked 13 Oct 2026)
+
+Goal: replace the fixed template body as the main route with a service that builds a 3D model from any
+character image, so nothing in the app is tied to one character. The service sits behind one switch
+(`geometry.provider` in config.yaml, or the `GEOMETRY_PROVIDER` environment variable). Sources are the
+vendors' own docs and repositories. Prices and licences change, so re-check before paying.
+
+| Option | What it covers | Cost found | Licence | Runs on a CPU-only PC |
+|---|---|---|---|---|
+| Tripo API | Image to 3D, multiview, rig check, auto rig (biped, quadruped and more; Mixamo or Tripo bone names; GLB or FBX), segmentation, retopology, format conversion | Image to 3D 20 credits (no texture) or 30 (standard texture), auto rig 25, rig check free. The pricing page showed 1 credit = 0.07 CNY (China site); international price and free credits NOT confirmed | Commercial service, API terms apply (not read) | Yes, it is a web API |
+| Meshy API | Image to 3D, auto rig, animation | Image to 3D 20 to 35 credits by model and texture size, auto rig 5, animation 3 per action. API credit price and any free API credits NOT confirmed (free web plan: 100 credits a month) | Commercial service (not read) | Yes |
+| Hunyuan3D 2.1 (self-hosted) | Shape and PBR texture | Free, but needs about 10 GB VRAM for shape, 29 GB for shape plus texture | Tencent licence: not valid in the EU, UK and South Korea; extra licence above 1 million monthly users; outputs may not be used to improve other AI models | No |
+| TripoSR (self-hosted) | Shape only (vertex colours, optional texture bake) | Free, about 6 GB VRAM | MIT | Not documented for CPU; needs a GPU in practice |
+
+Findings:
+- R9.1 Tripo is the only option found that covers the whole chain (generate, check riggability, rig,
+  split into parts) in one API. Recommendation: use Tripo first, behind the provider switch, and keep
+  Meshy as the second provider to add if Tripo's quality or price disappoints.
+- R9.2 Self-hosting is not possible on the owner's CPU-only PC. Keep Hunyuan3D 2.1 and TripoSR as options
+  for a rented GPU later. Check the Hunyuan licence territory rule before any use.
+- R9.3 Tripo's rig is Tripo's own skeleton (Mixamo-style names), not a Rigify rig. The app therefore has two
+  rig routes: the provider's rig (fast, fixed skeleton) and the app's Rigify route (more controls, needs
+  joint landmarks on the new mesh). Rig profiles in spec v3 Phase 14 choose between them.
+- R9.4 The multi-image option helps: Tripo's CLI page says front and back images together give more detail.
+  The API endpoint for it (multiview) is not wired yet.
+- R9.5 NOT verified: the exact body of Tripo's image-to-model request (the docs pages could not be read),
+  the international price, free credits, and quality on the test character. `geometry.tripo.generation_body`
+  in config.yaml holds the guess `{"input": "{file_token}"}`. The first real call will show the API's own
+  error message if it is wrong. Fix the body from https://developers.tripo3d.com/en/docs.
+- R9.6 Implemented: `orchestrator/geometry/` (base interface, registry, `manual` provider that imports a model
+  you already have, `tripo` provider), the `geometry-generate` CLI command, 10 tests with a fake API. No
+  real Tripo call has been made.

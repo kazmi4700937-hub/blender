@@ -29,6 +29,7 @@ blender_rig_assistant/
   orchestrator/
     settings.py            # Config, model name, API key and Blender path (one place)
     cli.py                 # Main CLI entrypoint
+    geometry/              # Providers that turn images into a 3D model (manual, tripo)
     bridge_client.py       # Robust JSON socket client
     vision/                # validate, silhouette, landmarks, overlay
     measure/               # landmarks -> character_spec.json
@@ -41,6 +42,7 @@ blender_rig_assistant/
     run_all_tests.py       # Runs everything and saves the output to docs/test_runs/
     render_test_reference_images.py
     run_headless_server.py
+    split_turnaround.py    # Cut a front/side/back sheet into separate images
     bpy_blender_shim.py    # Optional: run Blender tests with the bpy module instead of Blender
   docs/
     rigify_bones.txt
@@ -126,6 +128,26 @@ Run these from the project root.
    python -m orchestrator.cli agent "Make the character jump from a 3 meter high ground"
    python -m orchestrator.cli agent "Make the character wave hello"
    ```
+
+## Characters on gradient backgrounds, and turnaround sheets
+If the reference image has a gradient or busy background (spec Section 3 normally rejects it), allow it and let rembg cut the character out:
+```
+python tools/split_turnaround.py private/sheet.png --out private/views     # only if the views are on one sheet
+python -m orchestrator.cli validate-images --front private/views/front.png --side private/views/side.png --allow-busy-background
+python -m orchestrator.cli extract-silhouettes --front private/views/front.png --side private/views/side.png
+```
+The first run downloads the segmentation model (about 179 MB, `vision.segmentation_model` in `config.yaml`). Always check the mask before trusting measurements.
+
+## Getting a 3D model for the character (geometry providers)
+The service that builds the 3D model is a setting (`geometry.provider` in `config.yaml`, or `GEOMETRY_PROVIDER`).
+```
+# No account: import a model you made elsewhere (for example in a web tool)
+python -m orchestrator.cli geometry-generate --image private/views/front.png --provider manual --model path\to\model.glb
+
+# Tripo web API (set TRIPO_API_KEY first; see DECISIONS.md Phase 9 for what is not yet verified)
+python -m orchestrator.cli geometry-generate --image private/views/front.png --provider tripo --rig
+```
+Results are saved in `output/geometry/`. A Tripo rig is Tripo's own skeleton, not a Rigify rig.
 
 ## Notes
 - Do not commit third-party artwork (for example game character images) to a public repository. Keep private test images in a `private/` folder, which `.gitignore` excludes.

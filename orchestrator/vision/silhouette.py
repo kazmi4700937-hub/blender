@@ -6,6 +6,16 @@ from PIL import Image
 
 from .validate import detect_background_type
 
+_SESSIONS: Dict[str, Any] = {}
+
+
+def _get_rembg_session(rembg_module, model_name: str):
+    """One rembg session per model name, so the model is loaded once per run."""
+    if model_name not in _SESSIONS:
+        _SESSIONS[model_name] = rembg_module.new_session(model_name)
+    return _SESSIONS[model_name]
+
+
 def extract_silhouette_mask(
     image_path: str,
     output_mask_path: Optional[str] = None
@@ -42,7 +52,8 @@ def extract_silhouette_mask(
                 "This image needs background removal, which requires the 'rembg' package. "
                 "Install it with: pip install rembg onnxruntime"
             ) from exc
-        no_bg = rembg.remove(img)
+        from ..settings import get_segmentation_model
+        no_bg = rembg.remove(img, session=_get_rembg_session(rembg, get_segmentation_model()))
         no_bg_arr = np.array(no_bg)
         alpha = no_bg_arr[:, :, 3]
         raw_mask = (alpha > 128).astype(np.uint8) * 255
