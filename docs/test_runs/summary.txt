@@ -1,9 +1,10 @@
-render reference images                 PASSED    already present
-pytest                                  PASSED    43 passed in 25.14s
-phase 0 (tests/blender/test_phase0.py)  PASSED    exit code 0, pass marker found
-phase 4 (tests/blender/test_phase4.py)  PASSED    exit code 0, pass marker found
-phase 5 (tests/blender/test_phase5.py)  PASSED    exit code 0, pass marker found
-phase 6 (tests/blender/test_phase6.py)  PASSED    exit code 0, pass marker found
-phase 9 (tests/blender/test_phase9.py)  PASSED    exit code 0, pass marker found
+render reference images                   PASSED    already present
+pytest                                    PASSED    43 passed in 15.73s
+phase 0 (tests/blender/test_phase0.py)    PASSED    exit code 0, pass marker found
+phase 4 (tests/blender/test_phase4.py)    PASSED    exit code 0, pass marker found
+phase 5 (tests/blender/test_phase5.py)    PASSED    exit code 0, pass marker found
+phase 6 (tests/blender/test_phase6.py)    PASSED    exit code 0, pass marker found
+phase 9 (tests/blender/test_phase9.py)    PASSED    exit code 0, pass marker found
+phase 9c (tests/blender/test_phase9c.py)  PASSED    exit code 0, pass marker found
 
-7 passed, 0 failed, 0 skipped
+8 passed, 0 failed, 0 skipped

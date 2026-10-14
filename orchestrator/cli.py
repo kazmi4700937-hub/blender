@@ -1,3 +1,4 @@
+import json
 import typer
 import yaml
 import os
@@ -130,6 +131,51 @@ def geometry_generate(
         typer.echo(f"Credits used: {result.credits_used:g}")
     for note in result.notes:
         typer.secho(f"Note: {note}", fg=typer.colors.YELLOW)
+
+@app.command()
+def skeleton_to_spec(
+    output: str = typer.Option("output/character_spec_from_skeleton.json", help="Where to write the character spec"),
+):
+    """Read joints from a Mixamo style skeleton in the Blender scene (for example a Tripo rig) and write a character spec."""
+    client = get_bridge_client()
+    try:
+        client.connect()
+        spec = client.skeleton_to_spec()
+        os.makedirs(os.path.dirname(os.path.abspath(output)), exist_ok=True)
+        with open(output, "w", encoding="utf-8") as f:
+            json.dump(spec, f, indent=2)
+        typer.secho(f"Spec written to {output} (height {spec['height_m']} m, {len(spec['joints'])} joints).", fg=typer.colors.GREEN)
+        for warning in spec.get("warnings", []):
+            typer.secho(f"Warning: {warning}", fg=typer.colors.YELLOW)
+    except BridgeError as e:
+        typer.secho(f"Error: {e}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
+    finally:
+        client.close()
+
+@app.command()
+def rig_generated_mesh(
+    mesh_name: str = typer.Argument(..., help="Name of the imported mesh object, as printed by import-generated-mesh"),
+    spec: str = typer.Option("output/character_spec.json", help="Character spec with the joints (from the pipeline or skeleton-to-spec)"),
+    save: Optional[str] = typer.Option(None, help="Save the scene as this .blend file afterwards"),
+):
+    """Fit a Rigify rig to an imported mesh from the joints in a character spec and weight the mesh."""
+    client = get_bridge_client()
+    try:
+        client.connect()
+        res = client.rig_generated_mesh(mesh_name, os.path.abspath(spec))
+        typer.secho(f"Rig generated: {res['bone_count']} bones, {res['vertex_count']} vertices, "
+                    f"{res['unweighted_count']} without a weight.", fg=typer.colors.GREEN)
+        for warning in res["warnings"]:
+            typer.secho(f"Warning: {warning}", fg=typer.colors.YELLOW)
+        if save:
+            client.save_blend(os.path.abspath(save))
+            typer.echo(f"Saved {save}")
+    except BridgeError as e:
+        typer.secho(f"Error: {e}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
+    finally:
+        client.close()
 
 @app.command()
 def import_generated_mesh(

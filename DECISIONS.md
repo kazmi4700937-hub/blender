@@ -120,3 +120,19 @@ Findings:
   split normals, so shading may look slightly different; this is accepted for rigging.
 - R9.9 Tests: `tests/blender/test_phase9.py` builds its own models (no network). Not yet run on a real AI-generated
   character, which is the next check.
+
+## Phase 9c: Rigging an arbitrary imported mesh (14 Oct 2026)
+New bridge commands (logged as the spec requires): `skeleton_to_spec` and `rig_generated_mesh`. CLI: `skeleton-to-spec`, `rig-generated-mesh`.
+- R9c.1 Joints come from one of two places: the 2D landmarks (character spec, needs the vision model) or a Mixamo style skeleton that
+  came with the model (`skeleton_to_spec`; names are matched with or without the `mixamorig:` prefix, left/right swapped skeletons
+  are corrected and reported, unknown names are refused with the missing names listed).
+- R9c.2 `rig_generated_mesh` moves each target Rigify metarig bone to its joint, refines every joint's depth (Y) by casting rays
+  to the mesh front and back, and generates the rig. Metarig bones with no joint of their own (face, pelvis, toes, spine
+  details) move with their nearest ancestor that has one. Fingers move as one group from the wrist to the hand tip, because the
+  template's finger bones do not lie along its hand bone.
+- R9c.3 Checks: every vertex weighted, key deform bones control vertices, and a knee bend moves only the left leg. Tested on a
+  tall, thin variant of the base body exported as a bare .glb (no weights, no armature). NOT yet tested on a real AI-generated
+  character; joints that fall outside the mesh are reported as warnings, not hidden.
+- R9c.4 `fit.py` was refactored (`build_target_endpoints`, `objects` parameter); phases 4, 5, 6 and 9 still pass.
+- R9c.5 Known limits: finger and face bones are placed by following the hand/head, not measured; the crotch depth cannot be
+  refined on some meshes (reported as a warning); the 706-bone rig and A-pose handling are unchanged open items.

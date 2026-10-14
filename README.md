@@ -152,6 +152,13 @@ Results are saved in `output/geometry/`. To bring the model into Blender (with t
 python -m orchestrator.cli import-generated-mesh output/geometry/generated.glb --height-m 1.75 --save output/generated_scene.blend
 ``` A Tripo rig is Tripo's own skeleton, not a Rigify rig.
 
+To rig the imported mesh with a Rigify rig, using the joints in your character spec (or joints read from a Mixamo style skeleton that came with the model):
+```
+python -m orchestrator.cli rig-generated-mesh MESH_NAME --spec output/character_spec.json --save output/rigged_generated.blend
+python -m orchestrator.cli skeleton-to-spec --output output/character_spec_from_skeleton.json
+```
+`MESH_NAME` is the mesh name printed by `import-generated-mesh`.
+
 ## Notes
 - Do not commit third-party artwork (for example game character images) to a public repository. Keep private test images in a `private/` folder, which `.gitignore` excludes.
 - See `DECISIONS.md` for design decisions and open questions.

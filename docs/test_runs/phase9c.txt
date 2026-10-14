@@ -1,0 +1,74 @@
+=== RUNNING PHASE 9C ACCEPTANCE TESTS ===
+
+--- Test 1: joints are read from a Mixamo style skeleton ---
+Reloading external rigs...
+Reloading external metarigs...
+PASS: every joint is recovered within 1 mm (worst 0.005 mm)
+PASS: height comes from the head-top bone
+Reloading external rigs...
+Reloading external metarigs...
+PASS: a skeleton with left and right swapped is corrected and reported (worst 0.005 mm)
+Reloading external rigs...
+Reloading external metarigs...
+PASS: names without the mixamorig prefix also work
+Reloading external rigs...
+Reloading external metarigs...
+PASS: unknown bone names are refused, and the missing names are listed
+
+--- Test 2: a generated mesh with different proportions is rigged ---
+Reloading external rigs...
+Reloading external metarigs...
+INFO Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.2\4.2\python\lib\site-packages\extern_draco.dll
+08:31:08 | INFO: Starting glTF 2.0 export
+08:31:08 | INFO: Extracting primitive: base_character_mesh
+08:31:08 | INFO: Primitives created: 1
+08:31:08 | INFO: Finished glTF 2.0 export in 0.01735854148864746 s
+
+Reloading external rigs...
+Reloading external metarigs...
+08:31:08 | INFO: Data are loaded, start creating Blender stuff
+08:31:08 | INFO: Blender create Mesh node base_character_mesh
+08:31:08 | INFO: glTF import finished in 0.02s
+Imported: base_character vertices 1124 height 2.2765
+PASS: the imported mesh has no vertex groups (it is just a shape)
+Reloading external rigs...
+Reloading external metarigs...
+Fetch rig.
+Clear rig animation data.
+Create widgets collection: 0.013
+Duplicate rig: 0.012
+Instantiate rigs: 0.005
+Initialize rigs: 0.000
+Prepare bones: 0.004
+Generate bones: 7.150
+Parent bones: 0.044
+Configure bones: 0.024
+Preapply bones: 0.025
+Apply bones: 0.005
+Rig bones: 0.047
+Generate widgets: 0.050
+Assign layers: 0.069
+Finalize: 0.035
+The rest: 0.068
+Info: Successfully generated: "rig"
+  warning: Depth could not be refined (no mesh in front of or behind the joint, or too far off) for: crotch
+PASS: a full Rigify rig was generated (706 bones)
+PASS: every vertex has a weight
+PASS: every key deform bone controls vertices (smallest: 10)
+PASS: 136 bones without a joint of their own followed their parent
+PASS: the upper arm bone starts at the shoulder joint
+PASS: finger bones follow the hand (0.0 cm from the hand tip)
+PASS: refining the depth did not move a joint sideways or up and down
+  bending the left knee moved 102 of 1124 vertices
+PASS: bending the left knee moves the left leg
+PASS: no right leg vertex moved
+PASS: no torso or head vertex moved
+
+--- Test 3: bad input is refused with a readable error ---
+PASS: refused: Mesh object 'nothing' not found. Import the generated model first.
+PASS: refused: Give either 'spec' or a 'spec_path' that exists.
+
+=== ACCEPTANCE TESTS PASSED ===
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+
+Blender quit

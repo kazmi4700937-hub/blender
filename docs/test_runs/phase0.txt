@@ -4,21 +4,21 @@ Reloading external metarigs...
 PASS: Base character mesh has zero unweighted vertices.
 Fetch rig.
 Clear rig animation data.
-Create widgets collection: 0.003
-Duplicate rig: 0.024
-Instantiate rigs: 0.005
+Create widgets collection: 0.004
+Duplicate rig: 0.015
+Instantiate rigs: 0.002
 Initialize rigs: 0.001
-Prepare bones: 0.004
-Generate bones: 17.766
-Parent bones: 0.129
-Configure bones: 0.115
-Preapply bones: 0.049
-Apply bones: 0.018
-Rig bones: 0.224
-Generate widgets: 0.168
-Assign layers: 0.169
-Finalize: 0.141
-The rest: 0.159
+Prepare bones: 0.003
+Generate bones: 8.962
+Parent bones: 0.060
+Configure bones: 0.050
+Preapply bones: 0.019
+Apply bones: 0.008
+Rig bones: 0.084
+Generate widgets: 0.055
+Assign layers: 0.087
+Finalize: 0.064
+The rest: 0.070
 Info: Successfully generated: "rig"
 PASS: Rigify successfully generated 'rig' with 706 bones.
 PASS: All required control bones verified in generated rig.

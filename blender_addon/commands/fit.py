@@ -15,7 +15,7 @@ def cmd_import_base_character(params: Dict[str, Any]) -> Dict[str, Any]:
         raise FileNotFoundError(f"Base character asset not found at '{abs_blend_path}'")
 
     with bpy.data.libraries.load(abs_blend_path, link=False) as (data_from, data_to):
-        for obj_name in ["metarig", "base_character"]:
+        for obj_name in params.get("objects", ["metarig", "base_character"]):
             if obj_name in data_from.objects:
                 data_to.objects.append(obj_name)
 
@@ -29,42 +29,12 @@ def cmd_import_base_character(params: Dict[str, Any]) -> Dict[str, Any]:
     return {"imported": imported, "path": abs_blend_path}
 
 
-def cmd_fit_template(params: Dict[str, Any]) -> Dict[str, Any]:
+def build_target_endpoints(joints: Dict[str, Any], target_height_m: float) -> Dict[str, Tuple[Vector, Vector]]:
+    """Head and tail position of every body bone, computed from the joints of a character spec.
+
+    Shared by fit_template (which also deforms the template mesh) and fit_metarig_to_mesh
+    (which only places the metarig on a mesh that already exists).
     """
-    Deforms the template mesh and metarig so they match character_spec.json.
-    Computes exact bone affine transformations from rest to target joints,
-    deforms the mesh using linear blend skinning across vertex groups,
-    and positions edit bones exactly on target joint coordinates.
-    """
-    spec_path = params.get("spec_path")
-    spec_data = params.get("spec")
-
-    if not spec_data:
-        if not spec_path:
-            raise ValueError("Either 'spec_path' or 'spec' must be provided to fit_template")
-        abs_spec_path = os.path.abspath(spec_path)
-        if not os.path.exists(abs_spec_path):
-            raise FileNotFoundError(f"character_spec.json not found at '{abs_spec_path}'")
-        with open(abs_spec_path, "r", encoding="utf-8") as f:
-            spec_data = json.load(f)
-
-    joints = spec_data.get("joints", {})
-    widths = spec_data.get("widths", {})
-    depths = spec_data.get("depths", {})
-    target_height_m = spec_data.get("height_m", 1.75)
-
-    metarig = bpy.data.objects.get("metarig")
-    body = bpy.data.objects.get("base_character")
-
-    if not metarig or not body:
-        raise RuntimeError("Scene must contain 'metarig' and 'base_character' to fit template")
-
-    # Record original rest bone positions
-    bones_orig = {}
-    for b in metarig.data.bones:
-        bones_orig[b.name] = (Vector(b.head_local), Vector(b.tail_local))
-
-    # Construct target bone endpoints
     target_endpoints: Dict[str, Tuple[Vector, Vector]] = {}
 
     # Torso & Spine Chain
@@ -119,6 +89,46 @@ def cmd_fit_template(params: Dict[str, Any]) -> Dict[str, Any]:
         target_endpoints[f"shin{side}"] = (kn_pt, ank_pt)
         target_endpoints[f"foot{side}"] = (ank_pt, toe_pt)
         target_endpoints[f"toe{side}"] = (toe_pt, toe_pt + Vector((0, -0.06, 0)))
+
+    return target_endpoints
+
+
+def cmd_fit_template(params: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Deforms the template mesh and metarig so they match character_spec.json.
+    Computes exact bone affine transformations from rest to target joints,
+    deforms the mesh using linear blend skinning across vertex groups,
+    and positions edit bones exactly on target joint coordinates.
+    """
+    spec_path = params.get("spec_path")
+    spec_data = params.get("spec")
+
+    if not spec_data:
+        if not spec_path:
+            raise ValueError("Either 'spec_path' or 'spec' must be provided to fit_template")
+        abs_spec_path = os.path.abspath(spec_path)
+        if not os.path.exists(abs_spec_path):
+            raise FileNotFoundError(f"character_spec.json not found at '{abs_spec_path}'")
+        with open(abs_spec_path, "r", encoding="utf-8") as f:
+            spec_data = json.load(f)
+
+    joints = spec_data.get("joints", {})
+    widths = spec_data.get("widths", {})
+    depths = spec_data.get("depths", {})
+    target_height_m = spec_data.get("height_m", 1.75)
+
+    metarig = bpy.data.objects.get("metarig")
+    body = bpy.data.objects.get("base_character")
+
+    if not metarig or not body:
+        raise RuntimeError("Scene must contain 'metarig' and 'base_character' to fit template")
+
+    # Record original rest bone positions
+    bones_orig = {}
+    for b in metarig.data.bones:
+        bones_orig[b.name] = (Vector(b.head_local), Vector(b.tail_local))
+
+    target_endpoints = build_target_endpoints(joints, target_height_m)
 
     # Compute affine transformation for each bone
     chest_scale_x = widths.get("chest_width", 0.3) / 0.3

@@ -35,7 +35,7 @@ sys.path.insert(0, str(ROOT))
 from orchestrator.settings import get_blender_exe  # noqa: E402
 
 OUT_DIR = ROOT / "docs" / "test_runs"
-PHASES = [0, 4, 5, 6, 9]
+PHASES = [0, 4, 5, 6, 9, "9c"]
 PASS_MARKER = "ACCEPTANCE TESTS PASSED"
 
 

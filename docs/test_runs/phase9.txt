@@ -2,15 +2,15 @@
 
 --- Test 1: clean closed model is scaled to 1.75 m, stood on the ground and centred ---
 INFO Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.2\4.2\python\lib\site-packages\extern_draco.dll
-21:57:06 | INFO: Starting glTF 2.0 export
-21:57:06 | INFO: Extracting primitive: Sphere
-21:57:06 | INFO: Primitives created: 1
-21:57:06 | INFO: Finished glTF 2.0 export in 0.01880049705505371 s
+08:31:04 | INFO: Starting glTF 2.0 export
+08:31:04 | INFO: Extracting primitive: Sphere
+08:31:04 | INFO: Primitives created: 1
+08:31:04 | INFO: Finished glTF 2.0 export in 0.020429372787475586 s
 
-21:57:07 | INFO: Data are loaded, start creating Blender stuff
-21:57:07 | INFO: Blender create Mesh node Sphere
-21:57:07 | INFO: glTF import finished in 0.02s
-{'path': 'C:\\Users\\abbas\\AppData\\Local\\Temp\\phase9_w972soe9\\clean.glb', 'scale_factor': 0.795455, 'height_m': 1.75, 'width_m': 0.4375, 'depth_m': 0.2625, 'min_z': -0.0, 'vertices_before_weld': 1984, 'mesh_objects': ['Sphere'], 'armature_objects': [], 'vertices': 482, 'triangles': 960, 'non_manifold_edges': 0, 'loose_vertices': 0, 'pieces': 1, 'has_uv': True, 'materials': [], 'warnings': []}
+08:31:04 | INFO: Data are loaded, start creating Blender stuff
+08:31:04 | INFO: Blender create Mesh node Sphere
+08:31:04 | INFO: glTF import finished in 0.01s
+{'path': 'C:\\Users\\abbas\\AppData\\Local\\Temp\\phase9_90epl7xr\\clean.glb', 'scale_factor': 0.795455, 'height_m': 1.75, 'width_m': 0.4375, 'depth_m': 0.2625, 'min_z': -0.0, 'vertices_before_weld': 1984, 'mesh_objects': ['Sphere'], 'armature_objects': [], 'vertices': 482, 'triangles': 960, 'non_manifold_edges': 0, 'loose_vertices': 0, 'pieces': 1, 'has_uv': True, 'materials': [], 'warnings': []}
 PASS: height is 1.75 m (got 1.75)
 PASS: feet are on the ground (min z -0.0)
 PASS: model is centred on X and Y
@@ -20,46 +20,46 @@ PASS: clean mesh reports 0 open edges and 1 piece
 PASS: clean mesh gives no warnings (got [])
 
 --- Test 2: an open mesh is reported ---
-21:57:07 | INFO: Starting glTF 2.0 export
-21:57:07 | INFO: Extracting primitive: Cylinder
-21:57:07 | INFO: Primitives created: 1
-21:57:07 | INFO: Finished glTF 2.0 export in 0.010972023010253906 s
+08:31:05 | INFO: Starting glTF 2.0 export
+08:31:05 | INFO: Extracting primitive: Cylinder
+08:31:05 | INFO: Primitives created: 1
+08:31:05 | INFO: Finished glTF 2.0 export in 0.0036590099334716797 s
 
-21:57:08 | INFO: Data are loaded, start creating Blender stuff
-21:57:08 | INFO: Blender create Mesh node Cylinder
-21:57:08 | INFO: glTF import finished in 0.00s
+08:31:05 | INFO: Data are loaded, start creating Blender stuff
+08:31:05 | INFO: Blender create Mesh node Cylinder
+08:31:05 | INFO: glTF import finished in 0.00s
 PASS: open edges counted (48)
 PASS: a warning names the open edges
 PASS: default target height is 1.75 m
 
 --- Test 3: separate pieces are reported ---
-21:57:08 | INFO: Starting glTF 2.0 export
-21:57:08 | INFO: Extracting primitive: Sphere
-21:57:08 | INFO: Primitives created: 1
-21:57:08 | INFO: Extracting primitive: Cube
-21:57:08 | INFO: Primitives created: 1
-21:57:08 | INFO: Finished glTF 2.0 export in 0.02004837989807129 s
+08:31:05 | INFO: Starting glTF 2.0 export
+08:31:05 | INFO: Extracting primitive: Sphere
+08:31:05 | INFO: Primitives created: 1
+08:31:05 | INFO: Extracting primitive: Cube
+08:31:05 | INFO: Primitives created: 1
+08:31:05 | INFO: Finished glTF 2.0 export in 0.007008552551269531 s
 
-21:57:08 | INFO: Data are loaded, start creating Blender stuff
-21:57:08 | INFO: Blender create Mesh node Sphere
-21:57:08 | INFO: Blender create Mesh node Cube
-21:57:08 | INFO: glTF import finished in 0.01s
+08:31:05 | INFO: Data are loaded, start creating Blender stuff
+08:31:05 | INFO: Blender create Mesh node Sphere
+08:31:05 | INFO: Blender create Mesh node Cube
+08:31:05 | INFO: glTF import finished in 0.00s
 PASS: two pieces counted (got 2)
 PASS: a warning names the separate pieces
 
 --- Test 4: a model lying on its side is flagged ---
-21:57:08 | INFO: Starting glTF 2.0 export
-21:57:08 | INFO: Extracting primitive: Sphere
-21:57:08 | INFO: Primitives created: 1
-21:57:08 | INFO: Finished glTF 2.0 export in 0.011884212493896484 s
+08:31:05 | INFO: Starting glTF 2.0 export
+08:31:05 | INFO: Extracting primitive: Sphere
+08:31:05 | INFO: Primitives created: 1
+08:31:05 | INFO: Finished glTF 2.0 export in 0.006402254104614258 s
 
-21:57:08 | INFO: Data are loaded, start creating Blender stuff
-21:57:08 | INFO: Blender create Mesh node Sphere
-21:57:08 | INFO: glTF import finished in 0.01s
+08:31:05 | INFO: Data are loaded, start creating Blender stuff
+08:31:05 | INFO: Blender create Mesh node Sphere
+08:31:05 | INFO: glTF import finished in 0.00s
 PASS: a warning says the model may be lying down
 
 --- Test 5: bad input is rejected with a readable error ---
-PASS: rejected: Model file not found: 'C:\Users\abbas\AppData\Local\Temp\phase9_w972soe9\missing.glb'
+PASS: rejected: Model file not found: 'C:\Users\abbas\AppData\Local\Temp\phase9_90epl7xr\missing.glb'
 PASS: rejected: target_height_m 10.0 is outside 0.2 to 4.0 metres
 PASS: rejected: Unsupported model type '.txt'. Use one of: .glb, .gltf, .fbx, .obj
 

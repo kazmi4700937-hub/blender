@@ -163,3 +163,11 @@ class BridgeClient:
     def import_generated_mesh(self, path: str, target_height_m: float = 1.75) -> Dict[str, Any]:
         """Import a generated model, scale it to target_height_m, stand it on the ground and check the mesh."""
         return self.send_command("import_generated_mesh", {"path": path, "target_height_m": target_height_m})
+
+    def skeleton_to_spec(self, armature_name: Optional[str] = None) -> Dict[str, Any]:
+        """Read joint positions from a Mixamo style skeleton in the scene and return a character spec."""
+        return self.send_command("skeleton_to_spec", {"armature_name": armature_name} if armature_name else {})
+
+    def rig_generated_mesh(self, mesh_name: str, spec_path: str, refine_depth: bool = True) -> Dict[str, Any]:
+        """Place a Rigify metarig on an imported mesh from the joints in a character spec, generate the rig and weight the mesh."""
+        return self.send_command("rig_generated_mesh", {"mesh_name": mesh_name, "spec_path": spec_path, "refine_depth": refine_depth})

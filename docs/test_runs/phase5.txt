@@ -12,20 +12,20 @@ Reloading external metarigs...
 Fetch rig.
 Clear rig animation data.
 Create widgets collection: 0.006
-Duplicate rig: 0.054
-Instantiate rigs: 0.007
-Initialize rigs: 0.001
-Prepare bones: 0.011
-Generate bones: 23.207
-Parent bones: 0.153
-Configure bones: 0.136
-Preapply bones: 0.045
-Apply bones: 0.017
-Rig bones: 0.185
-Generate widgets: 0.149
-Assign layers: 0.171
-Finalize: 0.136
-The rest: 0.142
+Duplicate rig: 0.012
+Instantiate rigs: 0.003
+Initialize rigs: 0.000
+Prepare bones: 0.005
+Generate bones: 7.401
+Parent bones: 0.042
+Configure bones: 0.025
+Preapply bones: 0.025
+Apply bones: 0.006
+Rig bones: 0.101
+Generate widgets: 0.086
+Assign layers: 0.077
+Finalize: 0.078
+The rest: 0.053
 Info: Successfully generated: "rig"
 Generated rig: rig with 706 bones.
 Bind mesh: base_character -> rig, unweighted: 0
@@ -37,21 +37,21 @@ Reloading external rigs...
 Reloading external metarigs...
 Fetch rig.
 Clear rig animation data.
-Create widgets collection: 0.005
-Duplicate rig: 0.048
-Instantiate rigs: 0.007
-Initialize rigs: 0.001
-Prepare bones: 0.010
-Generate bones: 17.645
-Parent bones: 0.128
-Configure bones: 0.114
-Preapply bones: 0.050
-Apply bones: 0.020
-Rig bones: 0.227
-Generate widgets: 0.195
-Assign layers: 0.231
-Finalize: 0.157
-The rest: 0.170
+Create widgets collection: 0.010
+Duplicate rig: 0.012
+Instantiate rigs: 0.003
+Initialize rigs: 0.000
+Prepare bones: 0.005
+Generate bones: 7.170
+Parent bones: 0.049
+Configure bones: 0.061
+Preapply bones: 0.035
+Apply bones: 0.005
+Rig bones: 0.078
+Generate widgets: 0.046
+Assign layers: 0.060
+Finalize: 0.052
+The rest: 0.056
 Info: Successfully generated: "rig"
 Generated rig: rig with 706 bones.
 Bind mesh: base_character -> rig, unweighted: 0
@@ -63,21 +63,21 @@ Reloading external rigs...
 Reloading external metarigs...
 Fetch rig.
 Clear rig animation data.
-Create widgets collection: 0.007
-Duplicate rig: 0.044
-Instantiate rigs: 0.010
-Initialize rigs: 0.002
-Prepare bones: 0.008
-Generate bones: 19.086
-Parent bones: 0.118
-Configure bones: 0.100
-Preapply bones: 0.040
-Apply bones: 0.015
-Rig bones: 0.185
-Generate widgets: 0.133
-Assign layers: 0.157
-Finalize: 0.128
-The rest: 0.139
+Create widgets collection: 0.001
+Duplicate rig: 0.014
+Instantiate rigs: 0.003
+Initialize rigs: 0.000
+Prepare bones: 0.003
+Generate bones: 7.067
+Parent bones: 0.046
+Configure bones: 0.042
+Preapply bones: 0.033
+Apply bones: 0.010
+Rig bones: 0.065
+Generate widgets: 0.051
+Assign layers: 0.061
+Finalize: 0.042
+The rest: 0.057
 Info: Successfully generated: "rig"
 Generated rig: rig with 706 bones.
 Bind mesh: base_character -> rig, unweighted: 0
@@ -91,21 +91,21 @@ Reloading external rigs...
 Reloading external metarigs...
 Fetch rig.
 Clear rig animation data.
-Create widgets collection: 0.009
-Duplicate rig: 0.054
-Instantiate rigs: 0.009
-Initialize rigs: 0.002
-Prepare bones: 0.012
-Generate bones: 21.322
-Parent bones: 0.112
-Configure bones: 0.093
-Preapply bones: 0.045
-Apply bones: 0.019
-Rig bones: 0.191
-Generate widgets: 0.137
-Assign layers: 0.171
-Finalize: 0.162
-The rest: 0.140
+Create widgets collection: 0.003
+Duplicate rig: 0.028
+Instantiate rigs: 0.003
+Initialize rigs: 0.000
+Prepare bones: 0.006
+Generate bones: 7.432
+Parent bones: 0.043
+Configure bones: 0.023
+Preapply bones: 0.025
+Apply bones: 0.005
+Rig bones: 0.053
+Generate widgets: 0.041
+Assign layers: 0.062
+Finalize: 0.048
+The rest: 0.055
 Info: Successfully generated: "rig"
 Rotating knee bone: shin_fk.L
 Total vertices moved by bending left knee: 103 of 1138
